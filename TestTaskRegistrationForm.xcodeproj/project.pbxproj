@@ -13,6 +13,7 @@
 		35647AAD20E9655500462627 /* TestTaskRegistrationForm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 35647AAB20E9655500462627 /* TestTaskRegistrationForm.xcdatamodeld */; };
 		35647AAF20E9655600462627 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35647AAE20E9655600462627 /* Assets.xcassets */; };
 		35647AB220E9655600462627 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35647AB020E9655600462627 /* LaunchScreen.storyboard */; };
+		35647ABA20E98C4000462627 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35647AB920E98C4000462627 /* RoundedView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		35647AAE20E9655600462627 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		35647AB120E9655600462627 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35647AB320E9655600462627 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		35647AB920E98C4000462627 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				35647AA420E9655500462627 /* AppDelegate.swift */,
 				35647AA620E9655500462627 /* ViewController.swift */,
+				35647AB920E98C4000462627 /* RoundedView.swift */,
 				35647AA820E9655500462627 /* Main.storyboard */,
 				35647AAE20E9655600462627 /* Assets.xcassets */,
 				35647AB020E9655600462627 /* LaunchScreen.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				35647AAD20E9655500462627 /* TestTaskRegistrationForm.xcdatamodeld in Sources */,
 				35647AA720E9655500462627 /* ViewController.swift in Sources */,
+				35647ABA20E98C4000462627 /* RoundedView.swift in Sources */,
 				35647AA520E9655500462627 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
