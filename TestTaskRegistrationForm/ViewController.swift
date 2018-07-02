@@ -46,10 +46,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         setupViews()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.navigationBar.isHidden = true
-    }
-    
     //MARK: - TextFieldDelegate
     @objc func keyboardDidShow(notification: Notification) {
         let info: NSDictionary = notification.userInfo! as NSDictionary
@@ -117,6 +113,13 @@ class ViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    //MARK: - Target Register Button
+    @objc func registerButtonPressed(_ sender: RoundedButton) {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let second = main.instantiateViewController(withIdentifier: "SecondVC")
+        self.present(second, animated: true, completion: nil)
+    }
+    
 }
 //MARK: - Setup Constraints
 extension ViewController {
@@ -155,6 +158,7 @@ extension ViewController {
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         registerButton.setTitle("Register", for: .normal)
         registerButton.backgroundColor = UIColor.lightGray
+        registerButton.addTarget(self, action: #selector(registerButtonPressed(_:)), for: .touchUpInside)
         view.insertSubview(registerButton, aboveSubview: buttonsView)
         
         loginButton.translatesAutoresizingMaskIntoConstraints = false
