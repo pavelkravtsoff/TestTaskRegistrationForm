@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		35073D9C20EA3FD30074CC5C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35073D9B20EA3FD30074CC5C /* RoundedButton.swift */; };
+		35073D9E20EA60D10074CC5C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35073D9D20EA60D10074CC5C /* RegisterViewController.swift */; };
 		35647AA520E9655500462627 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35647AA420E9655500462627 /* AppDelegate.swift */; };
 		35647AA720E9655500462627 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35647AA620E9655500462627 /* ViewController.swift */; };
 		35647AAA20E9655500462627 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35647AA820E9655500462627 /* Main.storyboard */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35073D9B20EA3FD30074CC5C /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
+		35073D9D20EA60D10074CC5C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		35647AA120E9655500462627 /* TestTaskRegistrationForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestTaskRegistrationForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		35647AA420E9655500462627 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		35647AA620E9655500462627 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +64,9 @@
 			children = (
 				35647AA420E9655500462627 /* AppDelegate.swift */,
 				35647AA620E9655500462627 /* ViewController.swift */,
+				35073D9D20EA60D10074CC5C /* RegisterViewController.swift */,
 				35647AB920E98C4000462627 /* RoundedView.swift */,
+				35073D9B20EA3FD30074CC5C /* RoundedButton.swift */,
 				35647AA820E9655500462627 /* Main.storyboard */,
 				35647AAE20E9655600462627 /* Assets.xcassets */,
 				35647AB020E9655600462627 /* LaunchScreen.storyboard */,
@@ -142,7 +148,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				35647AAD20E9655500462627 /* TestTaskRegistrationForm.xcdatamodeld in Sources */,
+				35073D9C20EA3FD30074CC5C /* RoundedButton.swift in Sources */,
 				35647AA720E9655500462627 /* ViewController.swift in Sources */,
+				35073D9E20EA60D10074CC5C /* RegisterViewController.swift in Sources */,
 				35647ABA20E98C4000462627 /* RoundedView.swift in Sources */,
 				35647AA520E9655500462627 /* AppDelegate.swift in Sources */,
 			);
@@ -298,7 +306,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.poulkravtsoff.TestTaskRegistrationForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -316,7 +324,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.poulkravtsoff.TestTaskRegistrationForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

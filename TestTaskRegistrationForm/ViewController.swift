@@ -10,10 +10,11 @@ import UIKit
 
 class ViewController: UIViewController, UITextFieldDelegate {
     
+    //MARK: - Properties
     var imageView = UIImageView()
     var buttonsView = UIVisualEffectView()
-    var registerButton = UIButton()
-    var loginButton = UIButton()
+    var registerButton = RoundedButton()
+    var loginButton = RoundedButton()
     var usernameTextField = UITextField()
     var passwordTextField = UITextField()
     var constraints: [NSLayoutConstraint] = []
@@ -31,15 +32,22 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override var prefersStatusBarHidden: Bool {
         return true
     }
-    
+    //MARK: - LIfecycle of app
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //Add Observer to know about keyboard appearences
         let center: NotificationCenter = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
         usernameTextField.delegate = self
         passwordTextField.delegate = self
         setupViews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
     }
     
     //MARK: - TextFieldDelegate
@@ -64,7 +72,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 self.passwordImageView.center.y -= differenceY
                 self.lineImageViewPassword.center.y -= differenceY
                 self.passwordTextField.center.y -= differenceY
+                self.loginButton.center.y -= differenceY
+                self.registerButton.center.y -= differenceY
                 self.logoImageView.alpha = 0.0
+                
                 }, completion: nil)
             }
         }
@@ -82,6 +93,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
             self.passwordImageView.center.y = differenceY
             self.lineImageViewPassword.center.y = differenceY
             self.passwordTextField.center.y = differenceY
+            self.loginButton.center.y = differenceY
+            self.registerButton.center.y = differenceY
             self.logoImageView.alpha = 1.0
         }, completion: nil)
     }
@@ -140,11 +153,13 @@ extension ViewController {
         view.insertSubview(logoImageView, aboveSubview: imageView)
         
         registerButton.translatesAutoresizingMaskIntoConstraints = false
-        registerButton.titleLabel?.text = "Register"
+        registerButton.setTitle("Register", for: .normal)
+        registerButton.backgroundColor = UIColor.lightGray
         view.insertSubview(registerButton, aboveSubview: buttonsView)
         
         loginButton.translatesAutoresizingMaskIntoConstraints = false
-        loginButton.titleLabel?.text = "Login"
+        loginButton.setTitle("Login", for: .normal)
+        loginButton.backgroundColor = UIColor.lightGray
         view.insertSubview(loginButton, aboveSubview: buttonsView)
         
         usernameTextField.translatesAutoresizingMaskIntoConstraints = false
@@ -228,12 +243,19 @@ extension ViewController {
 
             passwordTextField.centerYAnchor.constraint(equalTo: passwordImageView.centerYAnchor),
             passwordTextField.leadingAnchor.constraint(equalTo: lineImageViewPassword.trailingAnchor, constant: 5),
-            passwordTextField.trailingAnchor.constraint(equalTo: passwordWhiteBackground.trailingAnchor, constant: -10)
+            passwordTextField.trailingAnchor.constraint(equalTo: passwordWhiteBackground.trailingAnchor, constant: -10),
             
+            loginButton.topAnchor.constraint(equalTo: passwordWhiteBackground.bottomAnchor, constant: 20),
+            loginButton.leadingAnchor.constraint(equalTo: userWhiteBackground.leadingAnchor),
+            loginButton.bottomAnchor.constraint(equalTo: buttonsView.bottomAnchor, constant: -20),
+            loginButton.widthAnchor.constraint(equalTo: buttonsView.widthAnchor, multiplier: 0.4),
+            
+            registerButton.topAnchor.constraint(equalTo: loginButton.topAnchor),
+            registerButton.trailingAnchor.constraint(equalTo: passwordWhiteBackground.trailingAnchor),
+            registerButton.bottomAnchor.constraint(equalTo: loginButton.bottomAnchor),
+            registerButton.widthAnchor.constraint(equalTo: loginButton.widthAnchor)
         ]
-        
         NSLayoutConstraint.activate(constraints)
-        
     }
 }
 
