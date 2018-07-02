@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     var imageView = UIImageView()
     var buttonsView = UIVisualEffectView()
@@ -24,19 +24,88 @@ class ViewController: UIViewController {
     var passwordImageView = UIImageView()
     let userWhiteBackground = RoundedView()
     let passwordWhiteBackground = RoundedView()
+    var keyboardY: CGFloat = 0.0
    
+    var activeTextField: UITextField!
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let center: NotificationCenter = NotificationCenter.default
+        center.addObserver(self, selector: #selector(keyboardDidShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        usernameTextField.delegate = self
+        passwordTextField.delegate = self
         setupViews()
     }
     
+    //MARK: - TextFieldDelegate
+    @objc func keyboardDidShow(notification: Notification) {
+        let info: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardY = self.view.frame.size.height - keyboardSize.height
+        let editingTextFieldY: CGFloat! = self.activeTextField?.frame.origin.y
+        
+        
+        if self.view.frame.origin.y >= 0 {
+        
+        if editingTextFieldY > keyboardY - 60 {
+            let differenceY = (keyboardY - 80)
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: {
+                self.buttonsView.center.y -= differenceY
+                self.userWhiteBackground.center.y -= differenceY
+                self.lineImageView.center.y -= differenceY
+                self.userImageView.center.y -= differenceY
+                self.usernameTextField.center.y -= differenceY
+                self.passwordWhiteBackground.center.y -= differenceY
+                self.passwordImageView.center.y -= differenceY
+                self.lineImageViewPassword.center.y -= differenceY
+                self.passwordTextField.center.y -= differenceY
+                self.logoImageView.alpha = 0.0
+                }, completion: nil)
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: Notification) {
+        let differenceY = (keyboardY - 80)
+        UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: {
+            self.buttonsView.center.y = differenceY
+            self.userWhiteBackground.center.y = differenceY
+            self.lineImageView.center.y = differenceY
+            self.userImageView.center.y = differenceY
+            self.usernameTextField.center.y = differenceY
+            self.passwordWhiteBackground.center.y = differenceY
+            self.passwordImageView.center.y = differenceY
+            self.lineImageViewPassword.center.y = differenceY
+            self.passwordTextField.center.y = differenceY
+            self.logoImageView.alpha = 1.0
+        }, completion: nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        activeTextField = textField
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
 }
-
+//MARK: - Setup Constraints
 extension ViewController {
     func setupViews() {
     
@@ -63,6 +132,9 @@ extension ViewController {
         
         logoImageView.adjustsImageSizeForAccessibilityContentSizeCategory = true
         logoImageView.image = UIImage(named: "logo")
+        logoImageView.layer.shadowColor = UIColor.white.cgColor
+        logoImageView.layer.shadowOffset = CGSize.zero
+        logoImageView.layer.shadowOpacity = 0.8
         logoImageView.contentMode = .scaleAspectFit
         logoImageView.translatesAutoresizingMaskIntoConstraints = false
         view.insertSubview(logoImageView, aboveSubview: imageView)
@@ -118,7 +190,7 @@ extension ViewController {
             logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             buttonsView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-            buttonsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4),
+            buttonsView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35),
             buttonsView.centerXAnchor.constraint(equalTo: imageView.centerXAnchor),
             buttonsView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -view.bounds.size.height * 0.08),
             
