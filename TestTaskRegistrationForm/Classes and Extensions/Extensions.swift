@@ -14,12 +14,12 @@ extension String {
                 let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
                 return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
-    
+
     func whatEmailDidInvalid() -> String {
         var message = String()
         var firstPartOfEmail = String()
         var theSecondPartOfEmail = String()
-        
+
         if (self.range(of: "@") != nil){
             let splitedStringArray: [String] = self.components(separatedBy: "@")
             if splitedStringArray.count > 2 {
@@ -38,7 +38,7 @@ extension String {
                             message = "Your domain name is invalid"
                         }
                     }else{
-                        message = "You forget write '.' in domain name"
+                        message = "You forget write symbol '.' in domain name"
                     }
                 }else{
                     message = "You Forget write the domain"
@@ -49,7 +49,7 @@ extension String {
         }
         return message
     }
-    
+
     func verifyUrl(_ urlString: String?) -> Bool {
         if let urlString = urlString {
             if let url = URL(string: urlString) {

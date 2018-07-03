@@ -10,34 +10,34 @@ import UIKit
 
 class RegisterFormViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource, UITableViewDelegate, UITableViewDataSource {
     
-    var backgroundImageView = UIImageView()
-    var firstNameTextField = RoundedTextField()
-    var lastNameTextField = RoundedTextField()
-    var emailTextField = RoundedTextField()
-    var passwordTextField = RoundedTextField()
-    var confirmPasswordTextField = RoundedTextField()
-    var countriesTextField = RoundedTextField()
-    var registerButton = RoundedButton()
-    var backButton = RoundedButton()
-    var contentView = UIView()
-    var buttonView = UIView()
+    private var backgroundImageView = UIImageView()
+    private var firstNameTextField = RoundedTextField()
+    private var lastNameTextField = RoundedTextField()
+    private var emailTextField = RoundedTextField()
+    private var passwordTextField = RoundedTextField()
+    private var confirmPasswordTextField = RoundedTextField()
+    private var countriesTextField = RoundedTextField()
+    private var registerButton = RoundedButton()
+    private var backButton = RoundedButton()
+    private var contentView = UIView()
+    private var buttonView = UIView()
     
-    var countries = [String]()
-    let countriesLoader = CountriesLoader()
+    private var countries = [String]()
+    private let countriesLoader = CountriesLoader()
     
-    var emailTableHintList = UITableView()
+    private var emailTableHintList = UITableView()
     
-    var domains = ["@yandex.ru", "@gmail.co.uk", "@gmail.com", "@hotbox.ru", "@hotmail.com", "@inbox.ru", "@list.ru", "@mail.ru", "@mail.com", "msn.com", "@rambler.ru", "@yahoo.com", "@icloud.com"]
-    var domainsList: [String] = []
+    private var domains = ["@yandex.ru", "@gmail.co.uk", "@gmail.com", "@hotbox.ru", "@hotmail.com", "@inbox.ru", "@list.ru", "@mail.ru", "@mail.com", "msn.com", "@rambler.ru", "@yahoo.com", "@icloud.com"]
+    private var domainsList: [String] = []
     
-    var activeTextField: UITextField!
+    private var activeTextField: UITextField!
     
-    var alertBlurView = UIView()
-    var alertView = RoundedView()
-    var alertLabel = RoundedLabel()
-    var alertButton = RoundedButton()
+    private var alertBlurView = UIView()
+    private var alertView = RoundedView()
+    private var alertLabel = RoundedLabel()
+    private var alertButton = RoundedButton()
     
-    var constraints: [NSLayoutConstraint] = []
+    private var constraints: [NSLayoutConstraint] = []
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -101,7 +101,6 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate, UIPicke
             if let emailText = emailTextField.text {
                 let messageTwo = emailText.whatEmailDidInvalid()
                 showAlert(message: "Your email is unvalid\n" + "\n" + messageTwo, buttonText: "I got it")
-                emailTextField.text = ""
             }
         }else if passwordTextField.text?.isEmpty ?? true {
             showAlert(message: "Please enter your password", buttonText: "I got it")
@@ -112,7 +111,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate, UIPicke
         }else if confirmPasswordTextField.text?.isEmpty ?? true {
             showAlert(message: "Please confirm your password", buttonText: "I got it")
         }else if passwordTextField.text != confirmPasswordTextField.text{
-            showAlert(message: "Your passwords are unequial. Please re-enter you password again", buttonText: "I got it")
+            showAlert(message: "Your both passwords are unequal. Please re-enter you password again", buttonText: "I got it")
             confirmPasswordTextField.text = ""
         }else {
             showAlert(message: "Wow! You did it!", buttonText: "Good job!")
@@ -467,8 +466,8 @@ extension RegisterFormViewController {
             countries = try countriesLoader.loadCountries()
         }catch{
             switch error {
-            case LoaderError.dictionaryFailed:
-                print("Could not load Dictionary")
+            case LoaderError.arrayFailed:
+                print("Could not load the array")
             case LoaderError.pathFailed:
                 print("Could not find valid file at path")
             default:

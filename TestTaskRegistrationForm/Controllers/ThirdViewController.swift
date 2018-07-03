@@ -10,21 +10,24 @@ import UIKit
 
 class ThirdViewController: UIViewController {
     
-    var imageView = UIImageView()
-    var blurView = UIView()
-    var mainLabel = RoundedLabel()
-    var exitButton = RoundedButton()
-    var constraints: [NSLayoutConstraint] = []
+    //MARK: - Properties
+    private var imageView = UIImageView()
+    private var blurView = UIView()
+    private var mainLabel = RoundedLabel()
+    private var exitButton = RoundedButton()
+    private var constraints: [NSLayoutConstraint] = []
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
+    //MARK: - Lifecycle app
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
     }
 
+    //MARK: - Button Actions
     @objc func backToMainViewController(_ sender: RoundedButton) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let first = main.instantiateViewController(withIdentifier: "FirstVC")

@@ -9,7 +9,7 @@
 import Foundation
 
 enum LoaderError: Error {
-    case dictionaryFailed
+    case arrayFailed
     case pathFailed
 }
 
@@ -24,7 +24,7 @@ class CountriesLoader {
                 }
                 return countries
             }else{
-                throw LoaderError.dictionaryFailed
+                throw LoaderError.arrayFailed
             }
         }else{
             throw LoaderError.pathFailed

@@ -11,23 +11,23 @@ import UIKit
 class ViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Properties
-    var imageView = UIImageView()
-    var buttonsView = UIVisualEffectView()
-    var registerButton = RoundedButton()
-    var loginButton = RoundedButton()
-    var usernameTextField = UITextField()
-    var passwordTextField = UITextField()
-    var constraints: [NSLayoutConstraint] = []
-    var logoImageView = UIImageView()
-    var userImageView = UIImageView()
-    var lineImageView = UIImageView()
-    var lineImageViewPassword = UIImageView()
-    var passwordImageView = UIImageView()
-    let userWhiteBackground = RoundedView()
-    let passwordWhiteBackground = RoundedView()
-    var keyboardY: CGFloat = 0.0
+    private var imageView = UIImageView()
+    private var buttonsView = UIVisualEffectView()
+    private var registerButton = RoundedButton()
+    private var loginButton = RoundedButton()
+    private var usernameTextField = UITextField()
+    private var passwordTextField = UITextField()
+    private var constraints: [NSLayoutConstraint] = []
+    private var logoImageView = UIImageView()
+    private var userImageView = UIImageView()
+    private var lineImageView = UIImageView()
+    private var lineImageViewPassword = UIImageView()
+    private var passwordImageView = UIImageView()
+    private let userWhiteBackground = RoundedView()
+    private let passwordWhiteBackground = RoundedView()
+    private var keyboardY: CGFloat = 0.0
    
-    var activeTextField: UITextField!
+    private var activeTextField: UITextField!
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -52,7 +52,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         let keyboardSize = (info[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
         keyboardY = self.view.frame.size.height - keyboardSize.height
         let editingTextFieldY: CGFloat! = self.activeTextField?.frame.origin.y
-        
         
         if self.view.frame.origin.y >= 0 {
         
@@ -103,7 +102,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         activeTextField = textField
     }
