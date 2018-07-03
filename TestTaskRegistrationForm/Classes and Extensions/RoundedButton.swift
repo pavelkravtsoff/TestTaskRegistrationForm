@@ -15,5 +15,4 @@ class RoundedButton: UIButton {
         layer.cornerRadius = 5.0
         layer.masksToBounds = true
     }
-
 }
