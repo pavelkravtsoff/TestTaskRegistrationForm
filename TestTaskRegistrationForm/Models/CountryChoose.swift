@@ -8,10 +8,6 @@
 
 import Foundation
 
-//struct CountryChoose {
-//    var countries: [String]
-//}
-
 enum LoaderError: Error {
     case dictionaryFailed
     case pathFailed

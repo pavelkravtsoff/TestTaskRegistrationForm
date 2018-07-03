@@ -18,6 +18,7 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate, UIPicke
     var confirmPasswordTextField = RoundedTextField()
     var countriesTextField = RoundedTextField()
     var registerButton = RoundedButton()
+    var backButton = RoundedButton()
     var contentView = UIView()
     var buttonView = UIView()
     
@@ -30,6 +31,11 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate, UIPicke
     var domainsList: [String] = []
     
     var activeTextField: UITextField!
+    
+    var alertBlurView = UIView()
+    var alertView = RoundedView()
+    var alertLabel = RoundedLabel()
+    var alertButton = RoundedButton()
     
     var constraints: [NSLayoutConstraint] = []
     
@@ -58,7 +64,6 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate, UIPicke
         }
         emailTextField.addTarget(self, action: #selector(searchResults), for: .editingChanged)
         loadCountries()
-        print("\(countries)")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -78,6 +83,87 @@ class RegisterFormViewController: UIViewController, UITextFieldDelegate, UIPicke
         confirmPasswordTextField.delegate = self
         emailTableHintList.delegate = self
         emailTableHintList.dataSource = self
+    }
+    
+    @objc func registerButtonPressed(_ sender: RoundedButton){
+        if !emailTableHintList.isHidden{
+            emailTableHintList.isHidden = true
+        }
+        if firstNameTextField.text?.isEmpty ?? true {
+            showAlert(message: "Please fill in your first name", buttonText: "I got it")
+        }else if lastNameTextField.text?.isEmpty ?? true {
+            showAlert(message: "Please fill in your last name", buttonText: "I got it")
+        }else if countriesTextField.text?.isEmpty ?? true {
+            showAlert(message: "Please choose your country", buttonText: "I got it")
+        }else if emailTextField.text?.isEmpty ?? true {
+            showAlert(message: "Please enter your email", buttonText: "I got it")
+        }else if !(emailTextField.text?.isValidEmail())!{
+            if let emailText = emailTextField.text {
+                let messageTwo = emailText.whatEmailDidInvalid()
+                showAlert(message: "Your email is unvalid\n" + "\n" + messageTwo, buttonText: "I got it")
+                emailTextField.text = ""
+            }
+        }else if passwordTextField.text?.isEmpty ?? true {
+            showAlert(message: "Please enter your password", buttonText: "I got it")
+        }else if passwordTextField.text!.characters.count < 6 {
+            showAlert(message: "Sorry, your password is too small\n" + "Minimum length of password is 6 characters", buttonText: "I got it")
+        }else if passwordTextField.text!.characters.count > 15 {
+            showAlert(message: "Sorry, your password is too long\n" + "Maximum length of password is 15 characters", buttonText: "I got it")
+        }else if confirmPasswordTextField.text?.isEmpty ?? true {
+            showAlert(message: "Please confirm your password", buttonText: "I got it")
+        }else if passwordTextField.text != confirmPasswordTextField.text{
+            showAlert(message: "Your passwords are unequial. Please re-enter you password again", buttonText: "I got it")
+            confirmPasswordTextField.text = ""
+        }else {
+            showAlert(message: "Wow! You did it!", buttonText: "Good job!")
+        }
+    }
+    
+    func showAlert(message: String, buttonText: String) {
+            print("button pressed")
+            alertLabel.text = message
+            alertButton.setTitle(buttonText, for: .normal)
+            alertLabel.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            alertLabel.center.y -= 100
+            alertButton.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+            alertButton.center.y += 100
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: {
+                self.alertBlurView.alpha = 1.0
+                self.alertLabel.alpha = 1.0
+                self.alertLabel.transform = CGAffineTransform.identity
+                self.alertLabel.center.y += 100
+                self.alertButton.alpha = 1.0
+                self.alertButton.transform = CGAffineTransform.identity
+                self.alertButton.center.y -= 100
+            }, completion: nil)
+    }
+    
+    @objc func closeAlert(){
+        
+        if alertButton.titleLabel?.text == "I got it"{
+            UIView.animate(withDuration: 0.25, delay: 0.0, options: .curveEaseIn, animations: {
+                self.alertBlurView.alpha = 0.0
+                self.alertLabel.alpha = 0.0
+                self.alertButton.alpha = 0.0
+                self.alertLabel.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                self.alertLabel.center.y -= 100
+                self.alertButton.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                self.alertButton.center.y += 100
+            }, completion: {_ in
+                self.alertLabel.center.y += 100
+                self.alertButton.center.y -= 100
+            })
+        }else{
+            let main = UIStoryboard(name: "Main", bundle: nil)
+            let third = main.instantiateViewController(withIdentifier: "ThirdVC")
+            self.present(third, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func backToMainViewController(_ sender: RoundedButton) {
+        let main = UIStoryboard(name: "Main", bundle: nil)
+        let first = main.instantiateViewController(withIdentifier: "FirstVC")
+        self.present(first, animated: true, completion: nil)
     }
     
 }
@@ -245,7 +331,41 @@ extension RegisterFormViewController {
         registerButton.translatesAutoresizingMaskIntoConstraints = false
         registerButton.backgroundColor = UIColor.lightGray
         registerButton.setTitle("Register", for: .normal)
+        registerButton.addTarget(self, action: #selector(registerButtonPressed(_:)), for: .touchUpInside)
         buttonView.addSubview(registerButton)
+        
+        backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.backgroundColor = UIColor.lightGray
+        backButton.setTitle("Back", for: .normal)
+        backButton.addTarget(self, action: #selector(backToMainViewController(_:)), for: .touchUpInside)
+        buttonView.addSubview(backButton)
+        
+        let blurEffect = UIBlurEffect(style: .dark)
+        alertBlurView = UIVisualEffectView(effect: blurEffect)
+        alertBlurView.translatesAutoresizingMaskIntoConstraints = false
+        alertBlurView.alpha = 0.0
+        view.addSubview(alertBlurView)
+        
+        alertView.translatesAutoresizingMaskIntoConstraints = false
+        alertView.backgroundColor = .white
+        alertView.alpha = 0.0
+        view.addSubview(alertView)
+        
+        alertLabel.translatesAutoresizingMaskIntoConstraints = false
+        alertLabel.alpha = 0.0
+        alertLabel.numberOfLines = 0
+        alertLabel.lineBreakMode = .byWordWrapping
+        alertLabel.textAlignment = .center
+        alertLabel.backgroundColor = .white
+        view.insertSubview(alertLabel, aboveSubview: alertView)
+        
+        alertButton.translatesAutoresizingMaskIntoConstraints = false
+        alertButton.alpha = 0.0
+        alertButton.setTitleColor(.black, for: .normal)
+        alertButton.titleLabel?.textAlignment = .center
+        alertButton.backgroundColor = .white
+        alertButton.addTarget(self, action: #selector(closeAlert), for: .touchUpInside)
+        view.insertSubview(alertButton, aboveSubview: alertView)
         
         emailTableHintList.translatesAutoresizingMaskIntoConstraints = false
         view.insertSubview(emailTableHintList, aboveSubview: emailTextField)
@@ -269,10 +389,15 @@ extension RegisterFormViewController {
             buttonView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             buttonView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            registerButton.centerXAnchor.constraint(equalTo: buttonView.centerXAnchor),
             registerButton.topAnchor.constraint(equalTo: buttonView.topAnchor),
-            registerButton.widthAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.5),
+            registerButton.widthAnchor.constraint(equalTo: buttonView.widthAnchor, multiplier: 0.4),
             registerButton.heightAnchor.constraint(equalTo: buttonView.heightAnchor, multiplier: 0.6),
+            registerButton.trailingAnchor.constraint(equalTo: lastNameTextField.trailingAnchor),
+            
+            backButton.topAnchor.constraint(equalTo: registerButton.topAnchor),
+            backButton.leadingAnchor.constraint(equalTo: firstNameTextField.leadingAnchor),
+            backButton.widthAnchor.constraint(equalTo: registerButton.widthAnchor),
+            backButton.heightAnchor.constraint(equalTo: registerButton.heightAnchor),
             
             firstNameTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: constant),
             firstNameTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: constant),
@@ -307,7 +432,27 @@ extension RegisterFormViewController {
             confirmPasswordTextField.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: constant),
             confirmPasswordTextField.leadingAnchor.constraint(equalTo: passwordTextField.leadingAnchor),
             confirmPasswordTextField.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor),
-            confirmPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor)
+            confirmPasswordTextField.heightAnchor.constraint(equalTo: passwordTextField.heightAnchor),
+            
+            alertBlurView.topAnchor.constraint(equalTo: view.topAnchor),
+            alertBlurView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            alertBlurView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            alertBlurView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            alertView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5),
+            alertView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.75),
+            alertView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            alertView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            alertLabel.topAnchor.constraint(equalTo: alertView.topAnchor, constant: 10),
+            alertLabel.leadingAnchor.constraint(equalTo: alertView.leadingAnchor, constant: 10),
+            alertLabel.trailingAnchor.constraint(equalTo: alertView.trailingAnchor, constant: -10),
+            alertLabel.heightAnchor.constraint(equalTo: alertView.heightAnchor, multiplier: 0.7),
+            
+            alertButton.heightAnchor.constraint(equalTo: alertView.heightAnchor, multiplier: 0.2),
+            alertButton.leadingAnchor.constraint(equalTo: alertLabel.leadingAnchor),
+            alertButton.trailingAnchor.constraint(equalTo: alertLabel.trailingAnchor),
+            alertButton.bottomAnchor.constraint(equalTo: alertView.bottomAnchor, constant: -10)
             
         ]
         
