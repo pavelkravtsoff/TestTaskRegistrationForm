@@ -14,6 +14,7 @@ class RoundedTextField: UITextField {
     override func draw(_ rect: CGRect) {
         super.draw(rect)
         
+        returnKeyType = .done
         autocorrectionType = .no
         adjustsFontSizeToFitWidth = true
         clearButtonMode = .whileEditing

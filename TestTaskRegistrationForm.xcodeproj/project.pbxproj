@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		35073D9C20EA3FD30074CC5C /* RoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35073D9B20EA3FD30074CC5C /* RoundedButton.swift */; };
-		35073D9E20EA60D10074CC5C /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35073D9D20EA60D10074CC5C /* RegisterViewController.swift */; };
 		35073DA020EAC0760074CC5C /* RegisterFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35073D9F20EAC0760074CC5C /* RegisterFormViewController.swift */; };
 		35073DA220EAD0170074CC5C /* RoundedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35073DA120EAD0170074CC5C /* RoundedTextField.swift */; };
 		35073DA420EADC600074CC5C /* Countries.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35073DA320EADC600074CC5C /* Countries.plist */; };
@@ -18,11 +17,11 @@
 		35647AAF20E9655600462627 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 35647AAE20E9655600462627 /* Assets.xcassets */; };
 		35647AB220E9655600462627 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 35647AB020E9655600462627 /* LaunchScreen.storyboard */; };
 		35647ABA20E98C4000462627 /* RoundedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35647AB920E98C4000462627 /* RoundedView.swift */; };
+		35D73F4D20EB68E10015A538 /* CountryChoose.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35D73F4C20EB68E10015A538 /* CountryChoose.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		35073D9B20EA3FD30074CC5C /* RoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedButton.swift; sourceTree = "<group>"; };
-		35073D9D20EA60D10074CC5C /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		35073D9F20EAC0760074CC5C /* RegisterFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterFormViewController.swift; sourceTree = "<group>"; };
 		35073DA120EAD0170074CC5C /* RoundedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextField.swift; sourceTree = "<group>"; };
 		35073DA320EADC600074CC5C /* Countries.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Countries.plist; sourceTree = "<group>"; };
@@ -34,6 +33,7 @@
 		35647AB120E9655600462627 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		35647AB320E9655600462627 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		35647AB920E98C4000462627 /* RoundedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedView.swift; sourceTree = "<group>"; };
+		35D73F4C20EB68E10015A538 /* CountryChoose.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryChoose.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +47,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		35073DA720EAF8AF0074CC5C /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				35647AA420E9655500462627 /* AppDelegate.swift */,
+			);
+			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		35073DA820EAF8FB0074CC5C /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				35073D9F20EAC0760074CC5C /* RegisterFormViewController.swift */,
+				35073D9B20EA3FD30074CC5C /* RoundedButton.swift */,
+				35073DA120EAD0170074CC5C /* RoundedTextField.swift */,
+				35647AB920E98C4000462627 /* RoundedView.swift */,
+				35647AA620E9655500462627 /* ViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		35073DA920EAF9150074CC5C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				35647AA820E9655500462627 /* Main.storyboard */,
+				35647AB020E9655600462627 /* LaunchScreen.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		35073DAA20EAF9250074CC5C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				35647AAE20E9655600462627 /* Assets.xcassets */,
+				35647AB320E9655600462627 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		35073DAC20EAF9C40074CC5C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35073DA320EADC600074CC5C /* Countries.plist */,
+				35D73F4C20EB68E10015A538 /* CountryChoose.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		35647A9820E9655500462627 = {
 			isa = PBXGroup;
 			children = (
@@ -66,18 +113,11 @@
 		35647AA320E9655500462627 /* TestTaskRegistrationForm */ = {
 			isa = PBXGroup;
 			children = (
-				35647AA420E9655500462627 /* AppDelegate.swift */,
-				35647AA620E9655500462627 /* ViewController.swift */,
-				35647AB920E98C4000462627 /* RoundedView.swift */,
-				35073DA120EAD0170074CC5C /* RoundedTextField.swift */,
-				35073D9D20EA60D10074CC5C /* RegisterViewController.swift */,
-				35073D9F20EAC0760074CC5C /* RegisterFormViewController.swift */,
-				35073D9B20EA3FD30074CC5C /* RoundedButton.swift */,
-				35647AA820E9655500462627 /* Main.storyboard */,
-				35647AAE20E9655600462627 /* Assets.xcassets */,
-				35647AB020E9655600462627 /* LaunchScreen.storyboard */,
-				35647AB320E9655600462627 /* Info.plist */,
-				35073DA320EADC600074CC5C /* Countries.plist */,
+				35073DA720EAF8AF0074CC5C /* AppDelegate */,
+				35073DA820EAF8FB0074CC5C /* Controllers */,
+				35073DAC20EAF9C40074CC5C /* Models */,
+				35073DAA20EAF9250074CC5C /* Resources */,
+				35073DA920EAF9150074CC5C /* Views */,
 			);
 			path = TestTaskRegistrationForm;
 			sourceTree = "<group>";
@@ -156,9 +196,9 @@
 			files = (
 				35073DA020EAC0760074CC5C /* RegisterFormViewController.swift in Sources */,
 				35073D9C20EA3FD30074CC5C /* RoundedButton.swift in Sources */,
+				35D73F4D20EB68E10015A538 /* CountryChoose.swift in Sources */,
 				35073DA220EAD0170074CC5C /* RoundedTextField.swift in Sources */,
 				35647AA720E9655500462627 /* ViewController.swift in Sources */,
-				35073D9E20EA60D10074CC5C /* RegisterViewController.swift in Sources */,
 				35647ABA20E98C4000462627 /* RoundedView.swift in Sources */,
 				35647AA520E9655500462627 /* AppDelegate.swift in Sources */,
 			);
@@ -306,7 +346,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M2L7UE9LKB;
-				INFOPLIST_FILE = TestTaskRegistrationForm/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TestTaskRegistrationForm/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -324,7 +364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = M2L7UE9LKB;
-				INFOPLIST_FILE = TestTaskRegistrationForm/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TestTaskRegistrationForm/Resources/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
